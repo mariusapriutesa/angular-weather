@@ -1,0 +1,8 @@
+<p>Search location:{{selectedItem?.label}} </p>
+
+
+
+<p-autoComplete [(ngModel)]="selectedItem" (onSelect)="onItemSelected($event)" [suggestions]="results"
+    (completeMethod)="search($event.query)"   field="label"></p-autoComplete>
+  
+ 
