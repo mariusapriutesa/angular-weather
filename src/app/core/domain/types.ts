@@ -92,3 +92,12 @@ export interface IWind {
     speed?: number;
     deg?:   number;
 }
+
+export interface IUser {
+  id:       number;
+  name:     string;
+  email:    string;
+  password: string;
+  enabled:   boolean;
+  createdAt: string;
+}

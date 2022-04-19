@@ -1,7 +1,7 @@
-<p>{{data | json}}</p>
-<ul>
-    <li >Tamp max {{data.main?.temp_max}}</li>
-    <li>Tamp min: {{data.main?.temp_min}} </li>
+<h2> {{'Temperatura Actual:' |uppercase}}</h2>
+<ul *ngIf="data && data.main">
+    <li>Tamp max: {{data.main?.temp_max |temp}}</li>
+    <li>Tamp min: {{data.main?.temp_min |temp}} </li>
     <li>hum: {{data.main?.humidity}}</li>
     <li>presion:{{data.main?.pressure}}</li>
-   </ul>
+</ul>

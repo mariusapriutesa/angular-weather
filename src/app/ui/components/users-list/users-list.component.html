@@ -1,0 +1,37 @@
+<div class="container">
+    <h2>Users list:</h2>
+  
+    <td><button type="button" class="btn btn-success" [routerLink]="['/user/create' ]">Crear</button></td>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Password</th>
+          <th scope="col">Enabled</th>
+          <th scope="col">Created at</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <th scope="row">
+            <a [routerLink]="['/users', user.id]">{{ user.id }}</a>
+            <!-- <a routerLink="/users/{{ user.id }}">{{ user.id }}</a> -->
+          </th>
+          <td>{{  user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.password }}</td>
+          <td>
+            <i class="pi pi-check text-success" *ngIf="user.enabled"></i>
+            <i class="pi pi-times text-danger" *ngIf="!user.enabled"></i>
+          </td>
+          <td>{{ user.createdAt | date : 'yyyy-MM-dd' }}</td>
+          <td><button type="button" class="btn btn-primary m-1" [routerLink]="['/user/update' , user.id]">Edit</button></td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Delet</button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>

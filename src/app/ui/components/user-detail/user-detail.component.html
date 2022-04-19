@@ -1,0 +1,15 @@
+<div class="container">
+
+    <ul class="list-group" *ngIf="user">
+      <li class="list-group-item"><strong>ID:</strong> {{ user.id }} </li>
+      <li class="list-group-item"><strong>Name:</strong> {{ user.name }} </li>
+      <li class="list-group-item"><strong>Email:</strong> {{ user.email }} </li>
+      <li class="list-group-item"><strong>Password:</strong> {{ user.password }} </li>
+      <li class="list-group-item"><strong>Enabled:</strong> {{ user.enabled }}
+        <span class="badge bg-success" *ngIf="user.enabled">Yes</span>
+        <span class="badge bg-danger" *ngIf="!user.enabled">No</span>
+    </li>
+    <li class="list-group-item"><strong>Created at:</strong> {{ user.createdAt | date }} </li>
+    </ul>
+  
+  </div>
