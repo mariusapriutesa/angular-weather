@@ -52,6 +52,28 @@ export class UsersService {
     );
   }
 
+/** PUT: update the hero on the server */
+updateUser(user: IUser): Observable<any> {
+  return this.http.put(this.usersUrl, user, this.httpOptions).pipe(
+    tap(_ => console.log(`updated user id=${user.id}`)),
+    catchError(this.handleError<any>('updateUser'))
+  );
+}
+
+/* GET user whose name contains search term */
+searchUser(term: string): Observable<IUser[]> {
+  if (!term.trim()) {
+    // if not search term, return empty hero array.
+    return of([]);
+  }
+  return this.http.get<IUser[]>(`${this.usersUrl}/?name=${term}`).pipe(
+    tap(x => x.length ?
+       console.log(`found user matching "${term}"`) :
+       console.log(`no user matching "${term}"`)),
+    catchError(this.handleError<IUser[]>('searchUser', []))
+  );
+}
+
 /**
  * Handle Http operation that failed.
  * Let the app continue.

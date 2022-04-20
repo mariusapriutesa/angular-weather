@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { IUser } from 'src/app/core/domain/types';
 import { UsersService } from 'src/app/core/services/users.service';
 
@@ -11,10 +12,12 @@ import { UsersService } from 'src/app/core/services/users.service';
 export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
+  user:IUser| undefined;
 
-  constructor(private service: UsersService) {
+  constructor(private service: UsersService , private route: ActivatedRoute) {
 
     this.userForm = new FormGroup({
+      'id': new FormControl(this.user?.id),
       'name': new FormControl(null, Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null),
@@ -25,6 +28,10 @@ export class UserFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    const userId = this.route.snapshot.params['id']; //obtenemos datos de la url
+    if (userId) {
+      this.service.getUserById(userId).subscribe(resp => this.user = resp);
+    }
   }
 
 
@@ -37,8 +44,14 @@ export class UserFormComponent implements OnInit {
 
     const userData: IUser = this.userForm.value;
 
-    this.service.addUser( userData ).subscribe( console.log );
+    const userId = this.route.snapshot.params['id'];
+    if (userId && this.user?.id != undefined) {
+      userData.id = this.user?.id;
+      this.service.updateUser(userData).subscribe(console.log);
+    } else {
+      this.service.addUser(userData).subscribe(console.log);
+    }
+  }
   }
 
 
-}
