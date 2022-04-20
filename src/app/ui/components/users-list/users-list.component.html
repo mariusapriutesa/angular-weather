@@ -29,8 +29,9 @@
         </td>
         <td>{{ user.createdAt | date : 'yyyy-MM-dd' }}</td>
         <td><button type="button" class="btn btn-primary m-1" [routerLink]="['/user/update' , user.id]">Edit</button>
+          <td><button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Delet</button>
         </td>
-        <td><button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Delet</button></td>
+       
       </tr>
     </tbody>
   </table>
