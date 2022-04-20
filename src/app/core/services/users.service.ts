@@ -60,6 +60,9 @@ updateUser(user: IUser): Observable<any> {
   );
 }
 
+
+
+
 /* GET user whose name contains search term */
 searchUser(term: string): Observable<IUser[]> {
   if (!term.trim()) {
@@ -73,6 +76,7 @@ searchUser(term: string): Observable<IUser[]> {
     catchError(this.handleError<IUser[]>('searchUser', []))
   );
 }
+
 
 /**
  * Handle Http operation that failed.
