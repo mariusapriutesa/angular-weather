@@ -15,18 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.menuItems = [
-        {
-          label: 'Users',
-          routerLink: '/users',
-          icon: PrimeIcons.USERS
-        },
-        {
-          label: 'Weather',
-          routerLink: '/weather',
-          icon: PrimeIcons.CLOUD
-        }
-    ];
+    
 
   }
 

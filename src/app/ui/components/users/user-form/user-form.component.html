@@ -45,14 +45,17 @@
         <div class="mb-3 row">
           <label class="col-sm-2 col-form-label">Enabled?</label>
           <div class="col-sm-10">
-            <input type="checkbox" name="enabled" formControlName="enabled" />
+            <!--  input type="checkbox" name="enabled" formControlName="enabled" / >   -->
+            <p-inputSwitch formControlName="enabled"></p-inputSwitch>
+            
           </div>
         </div>
 
         <div class="mb-3 row">
           <label class="col-sm-2 col-form-label">Created at</label>
           <div class="col-sm-10">
-            <input type="date" name="createdAt" formControlName="createdAt" class="form-control" />
+            <!--input type="date" name="createdAt" formControlName="createdAt" class="form-control" /-->
+            <p-calendar formControlName="createdAt" dateFormat="yy-mm-dd"></p-calendar>
             <small class="text-danger" *ngIf="userForm.get('createdAt')?.dirty && userForm.get('createdAt')?.hasError('required')">
               This field is required.
             </small>

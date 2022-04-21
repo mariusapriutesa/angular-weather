@@ -7,7 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {CalendarModule} from 'primeng/calendar';
 const routes: Routes=[
 
   { path: '', component: UsersListComponent },
@@ -28,7 +29,9 @@ const routes: Routes=[
     FormsModule,
     TableModule,
     ButtonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    CalendarModule,
+    InputSwitchModule
 
   ],
   exports:[
