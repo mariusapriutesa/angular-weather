@@ -1,29 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { IWeatherResult } from './core/domain/types';
-import { WeatherService } from './core/services/weather.service';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   title = 'angular-weather';
 
-  weatherResult: IWeatherResult = {};
-  weatherResult1: IWeatherResult = {};
-  weatherResult2: IWeatherResult = {};
+  menuItems: MenuItem[] = [];
 
-  constructor(private weatherService: WeatherService) {}
+
   ngOnInit(): void {
-    this.weatherService._weatherResultChanged$.subscribe(
-      (result) => (this.weatherResult = result)
-    );
-    this.weatherService._weatherResultChanged$.subscribe(
-      (result) => (this.weatherResult1 = result)
-    );
-    this.weatherService._weatherResultChanged$.subscribe(
-      (result) => (this.weatherResult2 = result)
-    );
+
+    this.menuItems = [
+        {
+          label: 'Users',
+          routerLink: '/users',
+          icon: PrimeIcons.USERS
+        },
+        {
+          label: 'Weather',
+          routerLink: '/weather',
+          icon: PrimeIcons.CLOUD
+        }
+    ];
+
   }
+
+
 }

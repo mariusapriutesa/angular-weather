@@ -3,7 +3,6 @@ import { IUser } from 'src/app/core/domain/types';
 import { UsersService } from 'src/app/core/services/users.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
@@ -19,56 +18,37 @@ export class UsersListComponent implements OnInit {
     this.service.getUsers().subscribe( resp => this.users = resp );
   }
 
-  searchUser(name : string){
+  deleteUser(user: IUser): void {
 
-    this.service.searchUser(name).subscribe(resp => {
-    
-    
-      const list =this.users.filter(user => user.name != name);
-      this.users=[...list]
-      //this.use
-    });
-    
-  }
-
-
-
-  
-  deleteUser(id :number):void{
-   
     Swal.fire({
-      title: 'Estas seguro?',
-      text: "No podrás revertir esto.!",
+      title: 'Are you sure?',
+      text: `If you delete '${user.name}' you won't be able to revert this!`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminarlo!'
+      confirmButtonText: 'Yes, delete!'
     }).then((result) => {
-      if (result.isConfirmed) {
-        this.service.deleteUser(id).subscribe(resp => {
-    
-    
-          const list =this.users.filter(user => user.id != id);
-          this.users=[...list]
-          //this.use
-        });
-        Swal.fire(
 
-          'Deleted!',
-          'El usuario ha sido borrado.',
-          'success'
-        )
+      if (result.isConfirmed) {
+
+        this.service.deleteUser(user.id).subscribe( resp => {
+
+          const list = this.users.filter(  item => item.id != user.id );
+          this.users = [...list];
+
+          Swal.fire(
+            'Deleted!',
+            `${user.name} has been deleted.`,
+            'success'
+          );
+        } );
       }
+
     })
-   /* this.service.deleteUser(id).subscribe(resp => {
-    
-    
-      const list =this.users.filter(user => user.id != id);
-      this.users=[...list]
-      //this.use
-    
-    
-    });*/
+
+
+
   }
+
 }

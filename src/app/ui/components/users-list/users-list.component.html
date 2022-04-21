@@ -1,26 +1,30 @@
-<div class="image">
-<div class="container">
-  <h2>Users list:</h2>
-  <td><button type="button" class="btn btn-success" [routerLink]="['/user/create' ]">Crear</button></td>
 
-  <table class="table" bgColor="#E6E6FA">
-    <thead>
+<div class="container">
+
+  <div class="flex align-items-center gap mb-3">
+    <button pButton pRipple type="button" icon="pi pi-plus" label="New" class="p-button-outlined p-button-success" routerLink="/user/create"></button>
+    <span class="text-xl font-semibold ml-5">Users list:</span>
+  </div>
+
+
+  <p-table [value]="users" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Password</th>
-        <th scope="col">Enabled</th>
-        <th scope="col">Created at</th>
+        <th></th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Enabled</th>
+        <th>Created at</th>
+        <th></th>
       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
         <th scope="row">
           <a [routerLink]="['/users', user.id]">{{ user.id }}</a>
-          <!-- <a routerLink="/users/{{ user.id }}">{{ user.id }}</a> -->
         </th>
-        <td>{{ user.name }}</td>
+        <td>{{  user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.password }}</td>
         <td>
@@ -28,13 +32,16 @@
           <i class="pi pi-times text-danger" *ngIf="!user.enabled"></i>
         </td>
         <td>{{ user.createdAt | date : 'yyyy-MM-dd' }}</td>
-        <td><button type="button" class="btn btn-primary m-1" [routerLink]="['/user/update' , user.id]">Edit</button>
-          <td><button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Delet</button>
+        <td class="">
+          <div class="button-links-bar">
+            <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-info" [routerLink]="['/user/update', user.id]"></button>
+            <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" (click)="deleteUser(user)"></button>
+          </div>
         </td>
-       
       </tr>
-    </tbody>
-  </table>
+    </ng-template>
+  </p-table>
 
-</div>
+
+
 </div>
