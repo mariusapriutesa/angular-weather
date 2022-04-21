@@ -2,28 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { SearchLocationComponent } from './ui/components/weather/search-location/search-location.component';
-
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MenubarModule } from 'primeng/menubar';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TempPipe } from './core/pipes/temp.pipe';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './core/services/in-memory-data.service';
 
-
 @NgModule({
-  declarations: [
-    AppComponent
-   
- 
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -34,13 +22,12 @@ import { InMemoryDataService } from './core/services/in-memory-data.service';
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false,
-      passThruUnknownUrl :true
-      }
-    )
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false,
+      passThruUnknownUrl: true,
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
