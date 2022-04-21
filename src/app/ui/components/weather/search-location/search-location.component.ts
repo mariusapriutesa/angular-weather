@@ -1,6 +1,6 @@
-import { WeatherService } from './../../../core/services/weather.service';
-import { IFeature, ISarchItem, IWeatherResult } from './../../../core/domain/types';
-import { LocationService } from './../../../core/services/location.service';
+import { WeatherService } from '../../../../core/services/weather.service';
+import { IFeature, ISarchItem, IWeatherResult } from '../../../../core/domain/types';
+import { LocationService } from '../../../../core/services/location.service';
 import { Component } from "@angular/core";
 import { ISearchResult } from 'src/app/core/domain/types';
 

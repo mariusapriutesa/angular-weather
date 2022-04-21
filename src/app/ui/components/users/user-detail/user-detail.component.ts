@@ -1,4 +1,4 @@
-import { IUser } from './../../../core/domain/types';
+import { IUser } from '../../../../core/domain/types';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/core/services/users.service';
 import {ActivatedRoute} from '@angular/router';
