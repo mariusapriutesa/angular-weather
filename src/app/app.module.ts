@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 
 import { HeaderComponent } from './ui/layout/header/header.component';
+import { HTTP_INTERCEPTORS_PROVIDERS } from './core/http';
+import { SharedModule } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,14 @@ import { HeaderComponent } from './ui/layout/header/header.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     MenubarModule,
+    SharedModule,
+    ButtonModule
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
     
   ],
-  providers: [],
+  providers: [HTTP_INTERCEPTORS_PROVIDERS],//para definir los interceptors
   bootstrap: [AppComponent],
 })
 export class AppModule {}

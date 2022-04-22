@@ -2,6 +2,7 @@ import { IUser } from '../../../../core/domain/types';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/core/services/users.service';
 import {ActivatedRoute} from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-detail',
@@ -11,6 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 export class UserDetailComponent implements OnInit {
 
   user: IUser | undefined;
+private subs: Subscription[] = [];
 
   constructor(private service: UsersService,
               private route:ActivatedRoute) { }
@@ -18,8 +20,12 @@ export class UserDetailComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.route.snapshot.params['id'];
     if (userId) {
-      this.service.getUserById( userId ).subscribe( resp => this.user = resp );
+      const sub4 =  this.service.getUserById( userId ).subscribe( resp => this.user = resp );
     }
+  }
+  ngOnDestroy(): void {
+   
+    this.subs.forEach((sub) => sub.unsubscribe());
   }
 
 }

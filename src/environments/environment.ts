@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   mapboxToken: `pk.eyJ1IjoibWFyaXVzYXByaXV0ZXNhIiwiYSI6ImNsMW9vdDZxODBtdjczb3BnOHd4d3R2djQifQ.ymx4OtJO8yO-91hzodpN4w`,
   weatherPointToken: `7b9287a6d128ed2d88dc5c9a18f8623e`,
- 
+  backendServer: 'http://localhost:8080' // URL to web api'
 };
 
 /*

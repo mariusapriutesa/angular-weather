@@ -1,41 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { IUser } from 'src/app/core/domain/types';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ILogingRequest, IUser } from 'src/app/core/domain/types';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { UsersService } from 'src/app/core/services/users.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  userForm: FormGroup | undefined;
-  userId: number | undefined;
- 
-  email: string | undefined;
-  password: string | undefined;
-  user: IUser | undefined;
-  constructor(private service: UsersService,
-    private route:ActivatedRoute)  {}
-  
+  formLogin: FormGroup;
 
-  ngOnInit(): void {
-    
-    
-    
+  constructor(
+    private auth: AuthService,
+    private router: Router
+    ) {
+    //controles
+    this.formLogin = new FormGroup({
+      username: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+    });
   }
-  login() {
-    const userId = this.route.snapshot.params['id'];
-    if (userId) { 
-      this.service.getUserById( userId ).subscribe( resp => this.user = resp );
-      if(this.email == this.user?.email){
-        console.log('sadsadasdasda');
-  
+
+  ngOnInit(): void {}
+  onFormSubmit(): void {
+    const data: ILogingRequest = this.formLogin.value;
+    this.auth.authenticate(data).subscribe((user) => {
+      if (user) {
+this.router.navigate(['/users']);
+
+      }else{
+        throw Error('El usuario es inccorecto')
       }
-      console.log(this.email);
-      console.log(this.password);
-    }
-    
+    });
   }
 }
