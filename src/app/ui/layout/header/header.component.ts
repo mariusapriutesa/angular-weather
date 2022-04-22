@@ -14,6 +14,11 @@ menuItems: MenuItem[] = [];
     
     this.menuItems = [
       {
+        label: 'Login',
+        routerLink: '/login',
+        icon: PrimeIcons.USER
+      },
+      {
         label: 'Users',
         routerLink: '/users',
         icon: PrimeIcons.USERS

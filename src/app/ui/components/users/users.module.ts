@@ -22,6 +22,7 @@ const routes: Routes=[
     UsersListComponent,
     UserDetailComponent,
     UserFormComponent
+   
   ],
   imports: [
     CommonModule,

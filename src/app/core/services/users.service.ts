@@ -7,13 +7,14 @@ import { catchError, Observable, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  private usersUrl = 'api/users';  // URL to web api
+  private usersUrl = 'http://localhost:8080/usuarios';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient) { }
+
 
 
   /** GET users from the server */
@@ -44,7 +45,7 @@ export class UsersService {
   /** PUT: update the user on the server */
   updateUser(user: IUser): Observable<any> {
     console.log( `Updating user:`, user );
-    return this.http.put(this.usersUrl, user, this.httpOptions).pipe(
+    return this.http.put(`${this.usersUrl}/${user.id}`, user, this.httpOptions).pipe(
       tap(_ => console.log(`updated user id=${user.id}`)),
       catchError(this.handleError<any>('updateUser'))
     );
