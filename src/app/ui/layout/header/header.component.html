@@ -4,7 +4,7 @@
           <img src="assets/images/primeng.svg" height="40" class="mr-2">
       </ng-template>
       <ng-template pTemplate="end" >
-        <div class="flex" *ngIf="auth.isAuthenticated()">
+        <div class="flex" *appIsAuth="true">
           <input type="text" class="form-control mr-3" pInputText placeholder="Search">
           <button pButton type="button"  (click)="disconnect()">Logout</button>
 

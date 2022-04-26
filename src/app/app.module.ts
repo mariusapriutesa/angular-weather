@@ -12,6 +12,7 @@ import { HeaderComponent } from './ui/layout/header/header.component';
 import { HTTP_INTERCEPTORS_PROVIDERS } from './core/http';
 import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { DirectivesModule } from './core/directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ButtonModule } from 'primeng/button';
     AppRoutingModule,
     MenubarModule,
     SharedModule,
-    ButtonModule
+    ButtonModule,
+    DirectivesModule
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.

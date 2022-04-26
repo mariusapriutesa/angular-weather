@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {  MenubarModule } from 'primeng/menubar';
 import { SharedModule } from 'primeng/api';
+import { DirectivesModule } from 'src/app/core/directives/directives.module';
 
 
 
@@ -9,6 +10,8 @@ import { SharedModule } from 'primeng/api';
   declarations: [],
   imports: [
     CommonModule
+    //DirectivesModule
+  
     
   ]
 })

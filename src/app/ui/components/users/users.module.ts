@@ -9,12 +9,13 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {CalendarModule} from 'primeng/calendar';
+import { RoleGuard } from 'src/app/core/guards/role.guard';
 const routes: Routes=[
 
   { path: '', component: UsersListComponent },
   { path: ':id', component: UserDetailComponent },
-  { path: 'form/create', component: UserFormComponent },
-  { path: 'form/update/:id', component: UserFormComponent }
+  { path: 'form/create', component: UserFormComponent , canActivate:[RoleGuard]},
+  { path: 'form/update/:id', component: UserFormComponent ,canActivate:[RoleGuard]}
 ];
 
 @NgModule({

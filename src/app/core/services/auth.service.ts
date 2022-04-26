@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ILogingRequest, IUser } from '../domain/types';
 
@@ -9,12 +9,20 @@ import { ILogingRequest, IUser } from '../domain/types';
 })
 export class AuthService {
   private authUrl = `${environment.backendServer}/auth`; // URL to web api
+  private _loggedUser=new Subject<IUser|null>();
+  public _loggedUser$ = this._loggedUser.asObservable();
+
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this._loggedUser.next(this.getLoggedUser());
+
+
+
+  }
 
   public authenticate(data: ILogingRequest): Observable<IUser> {
     return this.http.post<IUser>(`${this.authUrl}/login`, data).pipe(
@@ -22,6 +30,7 @@ export class AuthService {
         if (userDate && userDate.id) {
           this.setAuthId(data.username, data.password);
           this.setLoggedUser(userDate);
+          this._loggedUser.next(userDate);
         } else {
           this.disconect();
         }
@@ -59,5 +68,6 @@ return data != null;
   public disconect(): void {
     sessionStorage.removeItem('auth-id');
     sessionStorage.removeItem('user-data');
+    this._loggedUser.next(null);
   }
 }

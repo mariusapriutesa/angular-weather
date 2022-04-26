@@ -10,7 +10,8 @@ import { TempPipe } from 'src/app/core/pipes/temp.pipe';
 
 const routes: Routes=[
 
-  { path: '', component: WeatherComponent }
+  { path: '', component: WeatherComponent },
+  { path: 'asd', component: WeatherComponent }
  
 ];
 
