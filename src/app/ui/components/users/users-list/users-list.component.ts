@@ -4,6 +4,7 @@ import { IUser } from 'src/app/core/domain/types';
 import { UsersService } from 'src/app/core/services/users.service';
 import Swal from 'sweetalert2';
 import { LazyLoadEvent } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
@@ -24,23 +25,27 @@ export class UsersListComponent implements OnInit {
 //totalRecords=this.users.length;
 
   private subs: Subscription[] = [];
-  constructor(private service: UsersService) { }
+  constructor(private service: UsersService , private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    const sub5 = this.service.getUsers().subscribe( resp => this.users = resp );
+    //const sub5 = this.service.getUsers().subscribe( resp => this.users = resp );
+  
+      //const pageNumber = this.route.snapshot.params['pageNumber'];
+      
+      const sub1 = this.service.getUsers().subscribe( resp => this.users = resp );
+      this.subs.push(sub1);
+      
     
   }
-  getUsersP(){
-    this.service.getUsersP(this.p)
-      .subscribe((response: any) => {
-        this.users = response.data;
-        this.total = response.total;
-      });
-} 
-pageChangeEvent(event: number){
-  this.p = event;
-  this.getUsersP();
-}
+  hola(pageNumber: number){
+    
+    const sub1 = this.service.getUsersByPage(pageNumber).subscribe( resp => this.users = resp );
+    this.subs.push(sub1);
+   
+  }
+
+ 
+
   deleteUser(user: IUser): void {
 
     Swal.fire({

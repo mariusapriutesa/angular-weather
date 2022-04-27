@@ -24,7 +24,6 @@ export class IsEditorDirective implements OnInit {
 ngOnInit():void{
   
   this.isLoggedChanged$.subscribe(loggedUser => {
-    console.log("ttttttttttttttttt");
     if (true) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
       

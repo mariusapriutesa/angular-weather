@@ -14,7 +14,13 @@ export class UsersService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
- 
+  getUsersByPage(pageNumber: number): Observable<IUser[]> {
+    const url = `${this.usersUrl}/page/${pageNumber}`;
+    return this.http.get<IUser[]>(url).pipe(
+      tap(_ => console.log(`fetched page number=${pageNumber}`)),
+      catchError(this.handleError<IUser[]>(`getUserByPage page=${pageNumber}`))
+    );
+  }
   constructor(private http: HttpClient, private auth: AuthService) {}
   getUsersP(page: number){
     return this.http.get(this.url + '?page=' + page);
