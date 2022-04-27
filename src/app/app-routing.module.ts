@@ -11,7 +11,6 @@ const rutas: Routes = [
   {path: 'users' , loadChildren:() => import('./ui/components/users/users.module').then(m => m.UsersModule), canLoad:[AuthGuard]}
   
   /*
- 
   */
 ];
 

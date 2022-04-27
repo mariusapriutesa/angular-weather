@@ -10,12 +10,15 @@ import { ButtonModule } from 'primeng/button';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {CalendarModule} from 'primeng/calendar';
 import { RoleGuard } from 'src/app/core/guards/role.guard';
+import { DirectivesModule } from 'src/app/core/directives/directives.module';
+import { PaginatorModule } from 'primeng/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
 const routes: Routes=[
-
+//data es para espicificar parametos de la ruta
   { path: '', component: UsersListComponent },
   { path: ':id', component: UserDetailComponent },
-  { path: 'form/create', component: UserFormComponent , canActivate:[RoleGuard]},
-  { path: 'form/update/:id', component: UserFormComponent ,canActivate:[RoleGuard]}
+  { path: 'form/create', component: UserFormComponent , canActivate:[RoleGuard], data: {role:'ROLE_ADMIN'}},
+  { path: 'form/update/:id', component: UserFormComponent ,canActivate:[RoleGuard], data: {role:['ROLE_ADMIN','ROLE_EDITOR']}}
 ];
 
 @NgModule({
@@ -33,9 +36,12 @@ const routes: Routes=[
     ButtonModule,
     RouterModule.forChild(routes),
     CalendarModule,
-    InputSwitchModule
-
+    InputSwitchModule,
+    DirectivesModule,
+    PaginatorModule,
+    NgxPaginationModule
   ],
+  
   exports:[
     UsersListComponent,
     UserDetailComponent,

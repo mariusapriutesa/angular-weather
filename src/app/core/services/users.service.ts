@@ -10,13 +10,15 @@ import { AuthService } from './auth.service';
 })
 export class UsersService {
   private usersUrl = `${environment.backendServer}/usuarios`; // URL to web api
-
+  private url = 'https://reqres.in/api/users';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
-
+ 
   constructor(private http: HttpClient, private auth: AuthService) {}
-
+  getUsersP(page: number){
+    return this.http.get(this.url + '?page=' + page);
+  }
   /** GET users from the server */
   getUsers(): Observable<IUser[]> {
     return this.http

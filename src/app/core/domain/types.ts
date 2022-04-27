@@ -100,7 +100,7 @@ export interface IUser {
   password: string;
   enabled:   boolean;
   createdAt: string;
-  role:string;
+  role:      string;
 }
 export interface ILogingRequest{
   username:string

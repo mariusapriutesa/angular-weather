@@ -1,13 +1,14 @@
 import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ERols } from '../domain/enums';
 import { IUser } from '../domain/types';
 import { AuthService } from '../services/auth.service';
 
 @Directive({
-  selector: '[appIsAuth]'
+  selector: '[appIsEditor]'
 })
-export class IsAuthDirective implements OnInit {
-  @Input() public appIsAuth=false;
+export class IsEditorDirective implements OnInit {
+  @Input() public appIsEditor=false;
 
   private isLoggedChanged$: Observable<IUser |null>;
   constructor(
@@ -21,34 +22,15 @@ export class IsAuthDirective implements OnInit {
   }
 
 ngOnInit():void{
-  this.isLoggedChanged$.subscribe(loggedUser=>{
-    if((loggedUser && this.appIsAuth) ||(!loggedUser && !this.appIsAuth)){
+  
+  this.isLoggedChanged$.subscribe(loggedUser => {
+    console.log("ttttttttttttttttt");
+    if (true) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
-
-
-    }else {
-
+      
+    } else {
       this.viewContainerRef.clear();
     }
-
-
-    
-
-
-  })
-
-if(this.appIsAuth === this.auth.isAuthenticated()){
-this.viewContainerRef.createEmbeddedView(this.templateRef);
-
-}else{
-  this.viewContainerRef.clear();
-
-
+  });
 }
-
-
-
-}
-
-
 }
